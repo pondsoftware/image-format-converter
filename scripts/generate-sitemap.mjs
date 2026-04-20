@@ -2,7 +2,14 @@ import { writeFileSync } from "fs";
 
 const DOMAIN = "https://imageconverters.net";
 
-const urls = ["/"];
+const urls = [
+  "/",
+  "/heic-to-jpg",
+  "/webp-to-jpg",
+  "/heic-to-png",
+  "/avif-to-jpg",
+  "/webp-to-png",
+];
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

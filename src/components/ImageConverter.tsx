@@ -105,10 +105,26 @@ export default function ImageConverter() {
     a.click();
   };
 
-  const downloadAll = () => {
-    files
-      .filter((f) => f.status === "done")
-      .forEach((f) => downloadFile(f));
+  const downloadAll = async () => {
+    const doneFiles = files.filter((f) => f.status === "done" && f.convertedBlob);
+    if (doneFiles.length === 0) return;
+
+    const JSZip = (await import("jszip")).default;
+    const zip = new JSZip();
+
+    for (const file of doneFiles) {
+      const ext = file.outputFormat === "image/jpeg" ? "jpg" : "png";
+      const baseName = file.originalName.replace(/\.[^.]+$/, "");
+      zip.file(`${baseName}.${ext}`, file.convertedBlob!);
+    }
+
+    const blob = await zip.generateAsync({ type: "blob" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "converted-images.zip";
+    a.click();
+    URL.revokeObjectURL(url);
   };
 
   const clearAll = () => {
