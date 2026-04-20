@@ -274,15 +274,15 @@ export default function ImageConverter() {
                         <>
                           {" "}
                           &rarr; {formatSize(file.convertedBlob.size)}
-                          <span className="text-green-600 ml-1">
-                            (
-                            {Math.round(
-                              (1 -
-                                file.convertedBlob.size / file.originalSize) *
-                                100
-                            )}
-                            % smaller)
-                          </span>
+                          {file.convertedBlob.size < file.originalSize ? (
+                            <span className="text-green-600 ml-1">
+                              ({Math.round((1 - file.convertedBlob.size / file.originalSize) * 100)}% smaller)
+                            </span>
+                          ) : file.convertedBlob.size > file.originalSize ? (
+                            <span className="text-orange-600 ml-1">
+                              ({Math.round((file.convertedBlob.size / file.originalSize - 1) * 100)}% larger)
+                            </span>
+                          ) : null}
                         </>
                       )}
                     </p>
