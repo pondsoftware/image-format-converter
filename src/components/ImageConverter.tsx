@@ -158,7 +158,7 @@ export default function ImageConverter() {
           <select
             value={outputFormat}
             onChange={(e) => setOutputFormat(e.target.value as OutputFormat)}
-            className="rounded-lg border border-gray-300 px-4 py-2 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+            className="rounded-lg border border-gray-300 px-4 py-2 bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none"
           >
             <option value="image/jpeg">JPG</option>
             <option value="image/png">PNG</option>
@@ -198,8 +198,8 @@ export default function ImageConverter() {
         onClick={() => fileInputRef.current?.click()}
         className={`border-2 border-dashed rounded-xl p-12 text-center cursor-pointer transition ${
           isDragging
-            ? "border-blue-500 bg-blue-50"
-            : "border-gray-300 hover:border-blue-400 hover:bg-gray-50"
+            ? "border-indigo-500 bg-indigo-50"
+            : "border-gray-300 hover:border-indigo-400 hover:bg-gray-50"
         }`}
       >
         <input
@@ -242,7 +242,7 @@ export default function ImageConverter() {
               {doneCount > 1 && (
                 <button
                   onClick={downloadAll}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition"
+                  className="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700 transition"
                 >
                   Download All
                 </button>
@@ -291,7 +291,7 @@ export default function ImageConverter() {
                 {file.status === "done" && (
                   <button
                     onClick={() => downloadFile(file)}
-                    className="px-3 py-1.5 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition shrink-0 ml-3"
+                    className="px-3 py-1.5 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700 transition shrink-0 ml-3"
                   >
                     Download
                   </button>
@@ -340,7 +340,7 @@ function StatusIcon({ status }: { status: ConvertedFile["status"] }) {
     return <div className="w-5 h-5 rounded-full bg-gray-200" />;
   if (status === "converting")
     return (
-      <div className="w-5 h-5 rounded-full border-2 border-blue-500 border-t-transparent animate-spin" />
+      <div className="w-5 h-5 rounded-full border-2 border-indigo-500 border-t-transparent animate-spin" />
     );
   if (status === "done")
     return (
