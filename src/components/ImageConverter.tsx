@@ -390,6 +390,43 @@ function getTypeFromExtension(name: string): string {
   return map[ext || ""] || "application/octet-stream";
 }
 
+async function decodeHeicToCanvas(file: File): Promise<HTMLCanvasElement> {
+  // Use wasm-bundle variant — self-contained for browser, no fs dependency
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const libheif = (await import("libheif-js/wasm-bundle" as any)).default;
+  const buffer = await file.arrayBuffer();
+  const decoder = new libheif.HeifDecoder();
+  const data = decoder.decode(new Uint8Array(buffer));
+
+  if (!data || data.length === 0) {
+    throw new Error("Could not decode HEIC file — the file may be corrupted");
+  }
+
+  const image = data[0];
+  const width = image.get_width();
+  const height = image.get_height();
+
+  const canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) throw new Error("Could not create canvas context");
+
+  const imageData = ctx.createImageData(width, height);
+
+  await new Promise<void>((resolve, reject) => {
+    image.display(imageData, (displayData: ImageData | null) => {
+      if (!displayData) {
+        return reject(new Error("HEIC decoding failed — unsupported HEIC variant"));
+      }
+      resolve();
+    });
+  });
+
+  ctx.putImageData(imageData, 0, 0);
+  return canvas;
+}
+
 async function convertImage(
   file: File,
   outputFormat: OutputFormat,
@@ -397,33 +434,21 @@ async function convertImage(
 ): Promise<Blob> {
   const type = file.type || getTypeFromExtension(file.name);
 
-  // HEIC needs special handling via heic2any
+  // HEIC: decode with libheif-js (WASM-based decoder)
   if (type === "image/heic" || type === "image/heif") {
-    try {
-      const heic2anyModule = await import("heic2any");
-      const heic2any = heic2anyModule.default || heic2anyModule;
-      // heic2any only supports jpeg and png output
-      const heicOutputType = (outputFormat === "image/jpeg" || outputFormat === "image/png")
-        ? outputFormat
-        : "image/png";
-      const result = await heic2any({
-        blob: file,
-        toType: heicOutputType,
-        quality,
-      });
-      const intermediateBlob = Array.isArray(result) ? result[0] : result;
+    const canvas = await decodeHeicToCanvas(file);
 
-      // If the desired output is something heic2any doesn't support, do a second pass
-      if (heicOutputType !== outputFormat) {
-        const intermediateFile = new File([intermediateBlob], "temp.png", { type: "image/png" });
-        return convertImage(intermediateFile, outputFormat, quality);
-      }
-      return intermediateBlob;
-    } catch (heicError) {
-      throw new Error(
-        `HEIC conversion failed: ${heicError instanceof Error ? heicError.message : "Unknown error"}. Try a different file or use a smaller image.`
-      );
+    if (outputFormat === "image/x-icon") {
+      return canvasToIco(canvas);
     }
+
+    return new Promise((resolve, reject) => {
+      canvas.toBlob(
+        (blob) => (blob ? resolve(blob) : reject(new Error("Conversion failed"))),
+        outputFormat,
+        quality
+      );
+    });
   }
 
   // PDF needs pdf.js to render
