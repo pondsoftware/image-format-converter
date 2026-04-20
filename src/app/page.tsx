@@ -1,4 +1,5 @@
 import ImageConverter from "@/components/ImageConverter";
+import Link from "next/link";
 
 const faqData = [
   {
@@ -20,7 +21,31 @@ const faqData = [
   {
     question: "What is AVIF format?",
     answer: "AVIF is a modern image format based on the AV1 video codec. It offers better compression than both JPG and WEBP, but browser and software support is still catching up."
+  },
+  {
+    question: "Can I convert PDF to an image?",
+    answer: "Yes! Drop a PDF file into the converter and it will render the first page as an image in your chosen output format. The rendering happens entirely in your browser at 2x resolution for sharp results."
   }
+];
+
+const converterPages = [
+  { href: "/heic-to-jpg", label: "HEIC to JPG" },
+  { href: "/heic-to-png", label: "HEIC to PNG" },
+  { href: "/webp-to-jpg", label: "WEBP to JPG" },
+  { href: "/webp-to-png", label: "WEBP to PNG" },
+  { href: "/avif-to-jpg", label: "AVIF to JPG" },
+  { href: "/avif-to-png", label: "AVIF to PNG" },
+  { href: "/svg-to-png", label: "SVG to PNG" },
+  { href: "/svg-to-jpg", label: "SVG to JPG" },
+  { href: "/png-to-jpg", label: "PNG to JPG" },
+  { href: "/jpg-to-png", label: "JPG to PNG" },
+  { href: "/png-to-webp", label: "PNG to WebP" },
+  { href: "/jpg-to-webp", label: "JPG to WebP" },
+  { href: "/gif-to-png", label: "GIF to PNG" },
+  { href: "/png-to-ico", label: "PNG to ICO" },
+  { href: "/jpg-to-ico", label: "JPG to ICO" },
+  { href: "/pdf-to-jpg", label: "PDF to JPG" },
+  { href: "/pdf-to-png", label: "PDF to PNG" },
 ];
 
 export default function Home() {
@@ -46,12 +71,12 @@ export default function Home() {
     <div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
       <div className="mb-10">
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-          Convert HEIC, WEBP & AVIF to JPG or PNG
+          Free Image Format Converter — HEIC, WEBP, AVIF, SVG, PDF & More
         </h1>
         <p className="text-lg text-gray-600 max-w-2xl">
-          Free online image converter that runs entirely in your browser. Drop
-          your files below and download the converted images instantly. No
-          upload, no sign-up, no limits.
+          Convert between 11+ image formats entirely in your browser. Supports
+          HEIC, WEBP, AVIF, SVG, PDF, GIF, BMP, TIFF, JPG, PNG, and ICO. No
+          upload, no sign-up, no limits — 100% private.
         </p>
       </div>
 
@@ -96,8 +121,13 @@ export default function Home() {
                 <li>HEIC / HEIF (iPhone photos)</li>
                 <li>WEBP (Google web format)</li>
                 <li>AVIF (AV1 image format)</li>
+                <li>SVG (Vector graphics)</li>
+                <li>PDF (Document first page)</li>
+                <li>GIF (Graphics Interchange)</li>
                 <li>BMP (Bitmap)</li>
                 <li>TIFF (Tagged Image File)</li>
+                <li>JPG / PNG (for format conversion)</li>
+                <li>ICO (Icon files)</li>
               </ul>
             </div>
             <div className="bg-white rounded-lg border border-gray-200 p-4">
@@ -105,8 +135,33 @@ export default function Home() {
               <ul className="text-sm text-gray-600 space-y-1">
                 <li>JPG — best for photos, smaller file size</li>
                 <li>PNG — best for graphics, lossless quality</li>
+                <li>WEBP — modern web format, excellent compression</li>
+                <li>AVIF — next-gen format, best compression</li>
+                <li>BMP — uncompressed bitmap</li>
+                <li>GIF — simple animations and graphics</li>
+                <li>ICO — favicons for websites</li>
               </ul>
             </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 className="text-2xl font-semibold text-gray-900 mb-3">
+            Quick Converters
+          </h2>
+          <p className="text-gray-600 mb-4">
+            Jump directly to a specific conversion:
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+            {converterPages.map((page) => (
+              <Link
+                key={page.href}
+                href={page.href}
+                className="text-sm text-blue-600 hover:text-blue-800 hover:underline bg-blue-50 rounded-lg px-3 py-2 text-center transition"
+              >
+                {page.label}
+              </Link>
+            ))}
           </div>
         </section>
       </div>

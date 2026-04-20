@@ -11,12 +11,17 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://imageconverters.net/heic-to-png</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://imageconverters.net/webp-to-jpg</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://imageconverters.net/heic-to-png</loc>
+    <loc>https://imageconverters.net/webp-to-png</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -26,7 +31,62 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://imageconverters.net/webp-to-png</loc>
+    <loc>https://imageconverters.net/avif-to-png</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://imageconverters.net/svg-to-png</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://imageconverters.net/svg-to-jpg</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://imageconverters.net/png-to-jpg</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://imageconverters.net/jpg-to-png</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://imageconverters.net/png-to-webp</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://imageconverters.net/jpg-to-webp</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://imageconverters.net/gif-to-png</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://imageconverters.net/png-to-ico</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://imageconverters.net/jpg-to-ico</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://imageconverters.net/pdf-to-jpg</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://imageconverters.net/pdf-to-png</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

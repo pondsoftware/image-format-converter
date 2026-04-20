@@ -2,7 +2,17 @@
 
 import { useState, useCallback, useRef } from "react";
 
-type OutputFormat = "image/jpeg" | "image/png";
+type OutputFormat = "image/jpeg" | "image/png" | "image/webp" | "image/avif" | "image/bmp" | "image/gif" | "image/x-icon";
+
+const EXT_MAP: Record<string, string> = {
+  "image/jpeg": "jpg",
+  "image/png": "png",
+  "image/webp": "webp",
+  "image/avif": "avif",
+  "image/bmp": "bmp",
+  "image/gif": "gif",
+  "image/x-icon": "ico",
+};
 
 interface ConvertedFile {
   id: string;
@@ -97,7 +107,7 @@ export default function ImageConverter() {
 
   const downloadFile = (file: ConvertedFile) => {
     if (!file.convertedUrl) return;
-    const ext = file.outputFormat === "image/jpeg" ? "jpg" : "png";
+    const ext = EXT_MAP[file.outputFormat] || "bin";
     const baseName = file.originalName.replace(/\.[^.]+$/, "");
     const a = document.createElement("a");
     a.href = file.convertedUrl;
@@ -113,7 +123,7 @@ export default function ImageConverter() {
     const zip = new JSZip();
 
     for (const file of doneFiles) {
-      const ext = file.outputFormat === "image/jpeg" ? "jpg" : "png";
+      const ext = EXT_MAP[file.outputFormat] || "bin";
       const baseName = file.originalName.replace(/\.[^.]+$/, "");
       zip.file(`${baseName}.${ext}`, file.convertedBlob!);
     }
@@ -134,6 +144,7 @@ export default function ImageConverter() {
     setFiles([]);
   };
 
+  const showQuality = outputFormat === "image/jpeg" || outputFormat === "image/webp" || outputFormat === "image/avif";
   const doneCount = files.filter((f) => f.status === "done").length;
 
   return (
@@ -151,9 +162,14 @@ export default function ImageConverter() {
           >
             <option value="image/jpeg">JPG</option>
             <option value="image/png">PNG</option>
+            <option value="image/webp">WEBP</option>
+            <option value="image/avif">AVIF</option>
+            <option value="image/bmp">BMP</option>
+            <option value="image/gif">GIF</option>
+            <option value="image/x-icon">ICO</option>
           </select>
         </div>
-        {outputFormat === "image/jpeg" && (
+        {showQuality && (
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Quality: {Math.round(quality * 100)}%
@@ -190,7 +206,7 @@ export default function ImageConverter() {
           ref={fileInputRef}
           type="file"
           multiple
-          accept=".heic,.heif,.webp,.avif,.bmp,.tiff,.tif,image/heic,image/heif,image/webp,image/avif,image/bmp,image/tiff"
+          accept=".heic,.heif,.webp,.avif,.bmp,.tiff,.tif,.svg,.gif,.ico,.pdf,.jpg,.jpeg,.png,image/heic,image/heif,image/webp,image/avif,image/bmp,image/tiff,image/svg+xml,image/gif,image/x-icon,application/pdf,image/jpeg,image/png"
           onChange={(e) => e.target.files && addFiles(e.target.files)}
           className="hidden"
         />
@@ -211,7 +227,7 @@ export default function ImageConverter() {
           Drop images here or click to browse
         </p>
         <p className="text-sm text-gray-500 mt-1">
-          Supports HEIC, WEBP, AVIF, BMP, TIFF
+          Supports HEIC, WEBP, AVIF, BMP, TIFF, SVG, GIF, ICO, PDF, JPG, PNG
         </p>
       </div>
 
@@ -363,6 +379,13 @@ function getTypeFromExtension(name: string): string {
     bmp: "image/bmp",
     tiff: "image/tiff",
     tif: "image/tiff",
+    svg: "image/svg+xml",
+    gif: "image/gif",
+    ico: "image/x-icon",
+    pdf: "application/pdf",
+    jpg: "image/jpeg",
+    jpeg: "image/jpeg",
+    png: "image/png",
   };
   return map[ext || ""] || "application/octet-stream";
 }
@@ -377,15 +400,91 @@ async function convertImage(
   // HEIC needs special handling via heic2any
   if (type === "image/heic" || type === "image/heif") {
     const heic2any = (await import("heic2any")).default;
+    // heic2any only supports jpeg and png output
+    const heicOutputType = (outputFormat === "image/jpeg" || outputFormat === "image/png")
+      ? outputFormat
+      : "image/png";
     const result = await heic2any({
       blob: file,
-      toType: outputFormat,
+      toType: heicOutputType,
       quality,
     });
-    return Array.isArray(result) ? result[0] : result;
+    const intermediateBlob = Array.isArray(result) ? result[0] : result;
+
+    // If the desired output is something heic2any doesn't support, do a second pass
+    if (heicOutputType !== outputFormat) {
+      const intermediateFile = new File([intermediateBlob], "temp.png", { type: "image/png" });
+      return convertImage(intermediateFile, outputFormat, quality);
+    }
+    return intermediateBlob;
   }
 
-  // For WEBP, AVIF, BMP, TIFF — use Canvas API
+  // PDF needs pdf.js to render
+  if (type === "application/pdf") {
+    const pdfjsLib = await import("pdfjs-dist");
+    pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
+    const pdf = await pdfjsLib.getDocument(URL.createObjectURL(file)).promise;
+    const page = await pdf.getPage(1);
+    const viewport = page.getViewport({ scale: 2 });
+    const canvas = document.createElement("canvas");
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
+    const ctx = canvas.getContext("2d")!;
+    await page.render({ canvas, canvasContext: ctx, viewport }).promise;
+
+    // Handle ICO output
+    if (outputFormat === "image/x-icon") {
+      return canvasToIco(canvas);
+    }
+
+    return new Promise((resolve, reject) => {
+      canvas.toBlob(
+        (blob) => (blob ? resolve(blob) : reject(new Error("Conversion failed"))),
+        outputFormat,
+        quality
+      );
+    });
+  }
+
+  // SVG handling — load via object URL, draw to canvas
+  if (type === "image/svg+xml") {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => {
+        let w = img.naturalWidth;
+        let h = img.naturalHeight;
+        // If SVG has no intrinsic size, default to 1024x1024
+        if (!w || !h) {
+          w = 1024;
+          h = 1024;
+        }
+        const canvas = document.createElement("canvas");
+        canvas.width = w;
+        canvas.height = h;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) {
+          reject(new Error("Could not create canvas context"));
+          return;
+        }
+        ctx.drawImage(img, 0, 0, w, h);
+
+        if (outputFormat === "image/x-icon") {
+          canvasToIco(canvas).then(resolve).catch(reject);
+          return;
+        }
+
+        canvas.toBlob(
+          (blob) => (blob ? resolve(blob) : reject(new Error("Conversion failed — format may not be supported by your browser"))),
+          outputFormat,
+          quality
+        );
+      };
+      img.onerror = () => reject(new Error("Could not load SVG image"));
+      img.src = URL.createObjectURL(file);
+    });
+  }
+
+  // For all other formats — use Canvas API
   return new Promise((resolve, reject) => {
     const img = new Image();
     img.onload = () => {
@@ -398,6 +497,12 @@ async function convertImage(
         return;
       }
       ctx.drawImage(img, 0, 0);
+
+      if (outputFormat === "image/x-icon") {
+        canvasToIco(canvas).then(resolve).catch(reject);
+        return;
+      }
+
       canvas.toBlob(
         (blob) => {
           if (blob) {
@@ -418,4 +523,37 @@ async function convertImage(
       );
     img.src = URL.createObjectURL(file);
   });
+}
+
+async function canvasToIco(sourceCanvas: HTMLCanvasElement): Promise<Blob> {
+  // Resize to 32x32 for ICO
+  const icoCanvas = document.createElement("canvas");
+  icoCanvas.width = 32;
+  icoCanvas.height = 32;
+  const icoCtx = icoCanvas.getContext("2d")!;
+  icoCtx.drawImage(sourceCanvas, 0, 0, 32, 32);
+
+  // Get PNG data
+  const pngBlob = await new Promise<Blob>((res, rej) => {
+    icoCanvas.toBlob((b) => (b ? res(b) : rej(new Error("Failed to create PNG for ICO"))), "image/png");
+  });
+  const pngData = new Uint8Array(await pngBlob.arrayBuffer());
+
+  // Build ICO file with PNG payload
+  const ico = new Uint8Array(22 + pngData.length);
+  const view = new DataView(ico.buffer);
+  view.setUint16(0, 0, true); // reserved
+  view.setUint16(2, 1, true); // type: icon
+  view.setUint16(4, 1, true); // count: 1
+  ico[6] = 32; // width
+  ico[7] = 32; // height
+  ico[8] = 0; // color palette
+  ico[9] = 0; // reserved
+  view.setUint16(10, 1, true); // color planes
+  view.setUint16(12, 32, true); // bits per pixel
+  view.setUint32(14, pngData.length, true); // size of image data
+  view.setUint32(18, 22, true); // offset to image data
+  ico.set(pngData, 22);
+
+  return new Blob([ico], { type: "image/x-icon" });
 }

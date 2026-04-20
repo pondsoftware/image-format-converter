@@ -5,10 +5,22 @@ const DOMAIN = "https://imageconverters.net";
 const urls = [
   "/",
   "/heic-to-jpg",
-  "/webp-to-jpg",
   "/heic-to-png",
-  "/avif-to-jpg",
+  "/webp-to-jpg",
   "/webp-to-png",
+  "/avif-to-jpg",
+  "/avif-to-png",
+  "/svg-to-png",
+  "/svg-to-jpg",
+  "/png-to-jpg",
+  "/jpg-to-png",
+  "/png-to-webp",
+  "/jpg-to-webp",
+  "/gif-to-png",
+  "/png-to-ico",
+  "/jpg-to-ico",
+  "/pdf-to-jpg",
+  "/pdf-to-png",
 ];
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
