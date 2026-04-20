@@ -399,24 +399,31 @@ async function convertImage(
 
   // HEIC needs special handling via heic2any
   if (type === "image/heic" || type === "image/heif") {
-    const heic2any = (await import("heic2any")).default;
-    // heic2any only supports jpeg and png output
-    const heicOutputType = (outputFormat === "image/jpeg" || outputFormat === "image/png")
-      ? outputFormat
-      : "image/png";
-    const result = await heic2any({
-      blob: file,
-      toType: heicOutputType,
-      quality,
-    });
-    const intermediateBlob = Array.isArray(result) ? result[0] : result;
+    try {
+      const heic2anyModule = await import("heic2any");
+      const heic2any = heic2anyModule.default || heic2anyModule;
+      // heic2any only supports jpeg and png output
+      const heicOutputType = (outputFormat === "image/jpeg" || outputFormat === "image/png")
+        ? outputFormat
+        : "image/png";
+      const result = await heic2any({
+        blob: file,
+        toType: heicOutputType,
+        quality,
+      });
+      const intermediateBlob = Array.isArray(result) ? result[0] : result;
 
-    // If the desired output is something heic2any doesn't support, do a second pass
-    if (heicOutputType !== outputFormat) {
-      const intermediateFile = new File([intermediateBlob], "temp.png", { type: "image/png" });
-      return convertImage(intermediateFile, outputFormat, quality);
+      // If the desired output is something heic2any doesn't support, do a second pass
+      if (heicOutputType !== outputFormat) {
+        const intermediateFile = new File([intermediateBlob], "temp.png", { type: "image/png" });
+        return convertImage(intermediateFile, outputFormat, quality);
+      }
+      return intermediateBlob;
+    } catch (heicError) {
+      throw new Error(
+        `HEIC conversion failed: ${heicError instanceof Error ? heicError.message : "Unknown error"}. Try a different file or use a smaller image.`
+      );
     }
-    return intermediateBlob;
   }
 
   // PDF needs pdf.js to render
