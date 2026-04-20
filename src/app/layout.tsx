@@ -12,6 +12,20 @@ export const metadata: Metadata = {
   title: "HEIC to JPG Converter — Free Online Image Format Converter",
   description:
     "Convert HEIC, WEBP, and AVIF images to JPG or PNG instantly. Free, fast, and private — your files never leave your browser.",
+  openGraph: {
+    title: "HEIC to JPG Converter",
+    description:
+      "Convert HEIC, WEBP, and AVIF images to JPG or PNG instantly. Free, fast, and private — your files never leave your browser.",
+    type: "website",
+    url: "https://imageconverters.net",
+    siteName: "Image Format Converter",
+  },
+  twitter: {
+    card: "summary",
+    title: "HEIC to JPG Converter",
+    description:
+      "Convert HEIC, WEBP, and AVIF images to JPG or PNG instantly. Free, fast, and private — your files never leave your browser.",
+  },
 };
 
 export default function RootLayout({
