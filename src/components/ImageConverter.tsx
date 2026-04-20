@@ -266,7 +266,7 @@ export default function ImageConverter() {
                   <StatusIcon status={file.status} />
                   <div className="min-w-0">
                     <p className="text-sm font-medium text-gray-900 truncate">
-                      {file.originalName}
+                      {file.originalName.replace(/\.[^.]+$/, "")}.{EXT_MAP[file.outputFormat] || "bin"}
                     </p>
                     <p className="text-xs text-gray-500">
                       {formatSize(file.originalSize)}
