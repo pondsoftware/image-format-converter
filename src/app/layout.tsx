@@ -61,14 +61,25 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <footer className="bg-white border-t border-gray-200 mt-12">
           <div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+            <div className="mb-6">
+              <p className="text-sm font-semibold text-gray-800 text-center mb-3">More Photo Tools</p>
+              <div className="flex justify-center gap-4">
+                <a href="https://photometadata.net" className="flex-1 max-w-xs bg-blue-50 border border-blue-200 rounded-lg px-4 py-3 text-center hover:border-blue-400 hover:bg-blue-100 transition">
+                  <p className="font-semibold text-blue-700 text-sm">Photo Metadata Viewer</p>
+                  <p className="text-xs text-blue-600 mt-0.5">View &amp; strip EXIF data</p>
+                </a>
+                <a href="https://imageresizers.net" className="flex-1 max-w-xs bg-blue-50 border border-blue-200 rounded-lg px-4 py-3 text-center hover:border-blue-400 hover:bg-blue-100 transition">
+                  <p className="font-semibold text-blue-700 text-sm">Social Image Resizer</p>
+                  <p className="text-xs text-blue-600 mt-0.5">Resize for Instagram, TikTok &amp; more</p>
+                </a>
+              </div>
+            </div>
             <div className="mb-4">
               <p className="text-sm font-medium text-gray-700 text-center mb-2">More Free Tools</p>
               <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 text-sm">
                 <a href="https://appliancecostcalculator.net" className="text-blue-600 hover:underline">Appliance Cost Calculator</a>
                 <a href="https://sidehustletaxcalculator.net" className="text-blue-600 hover:underline">Side Hustle Tax Calculator</a>
-                <a href="https://photometadata.net" className="text-blue-600 hover:underline">Photo Metadata Viewer</a>
                 <a href="https://freelancerates.net" className="text-blue-600 hover:underline">Freelance Rate Calculator</a>
-                <a href="https://imageresizers.net" className="text-blue-600 hover:underline">Social Image Resizer</a>
                 <a href="https://lendingcalculator.net" className="text-blue-600 hover:underline">Mortgage Calculator</a>
                 <a href="https://compoundinterestcalc.app" className="text-blue-600 hover:underline">Compound Interest Calculator</a>
                 <a href="https://salaryconverter.net" className="text-blue-600 hover:underline">Salary Converter</a>
