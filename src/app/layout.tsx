@@ -9,6 +9,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  icons: {
+    icon: "/favicon.svg",
+  },
   title: "HEIC to JPG Converter — Free Online Image Format Converter",
   description:
     "Convert HEIC, WEBP, and AVIF images to JPG or PNG instantly. Free, fast, and private — your files never leave your browser.",
