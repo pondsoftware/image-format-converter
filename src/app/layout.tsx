@@ -58,7 +58,7 @@ export default function RootLayout({
         <header className="bg-indigo-600 text-white shadow-sm">
           <div className="max-w-4xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
             <a href="/" className="flex items-center gap-2">
-              <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+              <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" role="img" aria-label="Image Format Converter logo">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
               </svg>
               <span className="text-xl font-bold">Image Format Converter</span>

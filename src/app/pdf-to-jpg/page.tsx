@@ -27,6 +27,19 @@ export default function PdfToJpgPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://imageconverters.net" },
+              { "@type": "ListItem", "position": 2, "name": "PDF to JPG Converter", "item": "https://imageconverters.net/pdf-to-jpg" }
+            ]
+          })
+        }}
+      />
       <div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <div className="mb-10">
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
