@@ -16,12 +16,22 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://imageconverters.net/heic-to-webp</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://imageconverters.net/webp-to-jpg</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://imageconverters.net/webp-to-png</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://imageconverters.net/webp-to-gif</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -36,6 +46,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://imageconverters.net/avif-to-webp</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://imageconverters.net/svg-to-png</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -46,12 +61,12 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://imageconverters.net/png-to-jpg</loc>
+    <loc>https://imageconverters.net/svg-to-webp</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://imageconverters.net/jpg-to-png</loc>
+    <loc>https://imageconverters.net/png-to-jpg</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -61,12 +76,57 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://imageconverters.net/png-to-gif</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://imageconverters.net/jpg-to-png</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://imageconverters.net/jpg-to-webp</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://imageconverters.net/jpg-to-gif</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://imageconverters.net/gif-to-png</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://imageconverters.net/gif-to-jpg</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://imageconverters.net/tiff-to-jpg</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://imageconverters.net/tiff-to-png</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://imageconverters.net/bmp-to-jpg</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://imageconverters.net/bmp-to-png</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://imageconverters.net/ico-to-png</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

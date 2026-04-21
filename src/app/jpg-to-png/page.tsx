@@ -98,6 +98,28 @@ export default function JpgToPngPage() {
           </section>
         </div>
 
+        <div className="mt-12">
+          <section>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-3">
+              Related Conversions
+            </h2>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              <Link href="/png-to-jpg" className="text-sm text-blue-600 hover:text-blue-800 hover:underline bg-blue-50 rounded-lg px-3 py-2 text-center transition">
+                PNG to JPG
+              </Link>
+              <Link href="/jpg-to-webp" className="text-sm text-blue-600 hover:text-blue-800 hover:underline bg-blue-50 rounded-lg px-3 py-2 text-center transition">
+                JPG to WebP
+              </Link>
+              <Link href="/jpg-to-gif" className="text-sm text-blue-600 hover:text-blue-800 hover:underline bg-blue-50 rounded-lg px-3 py-2 text-center transition">
+                JPG to GIF
+              </Link>
+              <Link href="/jpg-to-ico" className="text-sm text-blue-600 hover:text-blue-800 hover:underline bg-blue-50 rounded-lg px-3 py-2 text-center transition">
+                JPG to ICO
+              </Link>
+            </div>
+          </section>
+        </div>
+
         <div className="mt-8 text-center">
           <Link href="/" className="text-blue-600 hover:underline text-sm">
             &larr; Back to Image Format Converter

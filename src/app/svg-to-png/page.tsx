@@ -99,6 +99,28 @@ export default function SvgToPngPage() {
           </section>
         </div>
 
+        <div className="mt-12">
+          <section>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-3">
+              Related Conversions
+            </h2>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              <Link href="/svg-to-jpg" className="text-sm text-blue-600 hover:text-blue-800 hover:underline bg-blue-50 rounded-lg px-3 py-2 text-center transition">
+                SVG to JPG
+              </Link>
+              <Link href="/svg-to-webp" className="text-sm text-blue-600 hover:text-blue-800 hover:underline bg-blue-50 rounded-lg px-3 py-2 text-center transition">
+                SVG to WebP
+              </Link>
+              <Link href="/png-to-webp" className="text-sm text-blue-600 hover:text-blue-800 hover:underline bg-blue-50 rounded-lg px-3 py-2 text-center transition">
+                PNG to WebP
+              </Link>
+              <Link href="/png-to-ico" className="text-sm text-blue-600 hover:text-blue-800 hover:underline bg-blue-50 rounded-lg px-3 py-2 text-center transition">
+                PNG to ICO
+              </Link>
+            </div>
+          </section>
+        </div>
+
         <div className="mt-8 text-center">
           <Link href="/" className="text-blue-600 hover:underline text-sm">
             &larr; Back to Image Format Converter
