@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "PDF to JPG Converter — Extract PDF Pages as Images Free",
   description:
     "Convert PDF files to JPG images instantly in your browser. Extract the first page as a high-quality JPG. Free, private, no upload required.",
+  alternates: { canonical: "/pdf-to-jpg" },
 };
 
 const jsonLd = {

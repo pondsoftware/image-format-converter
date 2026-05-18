@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "JPG to PNG Converter — Add Transparency Support Free",
   description:
     "Convert JPG images to PNG format for transparency support and lossless quality. Free, private, browser-based. No upload required.",
+  alternates: { canonical: "/jpg-to-png" },
 };
 
 const jsonLd = {

@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "HEIC to JPG Converter — Free, Private, No Upload Required",
   description:
     "Convert iPhone HEIC photos to JPG format instantly in your browser. No upload, no sign-up, no limits. 100% private and free.",
+  alternates: { canonical: "/heic-to-jpg" },
 };
 
 const jsonLd = {

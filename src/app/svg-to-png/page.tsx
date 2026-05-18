@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "SVG to PNG Converter — Convert Vector Graphics to PNG Free",
   description:
     "Convert SVG vector graphics to PNG raster images instantly in your browser. No upload, no sign-up, no limits. 100% private and free.",
+  alternates: { canonical: "/svg-to-png" },
 };
 
 const jsonLd = {

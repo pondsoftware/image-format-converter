@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "PNG to JPG Converter — Reduce Image File Size Free",
   description:
     "Convert PNG images to JPG to dramatically reduce file size. Free, private, browser-based converter. No upload required.",
+  alternates: { canonical: "/png-to-jpg" },
 };
 
 const jsonLd = {

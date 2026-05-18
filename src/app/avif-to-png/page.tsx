@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "AVIF to PNG Converter — Convert AVIF Images to PNG Free",
   description:
     "Convert AVIF images to PNG format for universal compatibility. Free, private, browser-based converter. No upload required.",
+  alternates: { canonical: "/avif-to-png" },
 };
 
 const jsonLd = {

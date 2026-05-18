@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "PDF to PNG Converter — Convert PDF Pages to Lossless Images Free",
   description:
     "Convert PDF files to PNG images for lossless quality. Extract the first page as a crisp PNG. Free, private, no upload required.",
+  alternates: { canonical: "/pdf-to-png" },
 };
 
 const jsonLd = {

@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "WEBP to PNG Converter — Lossless WEBP Conversion",
   description:
     "Convert WEBP images to lossless PNG format. Preserves full quality and transparency. Free, private, no upload required.",
+  alternates: { canonical: "/webp-to-png" },
 };
 
 const jsonLd = {
