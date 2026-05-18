@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "SVG to JPG Converter — Convert Vector Graphics to JPG Free",
   description:
     "Convert SVG vector graphics to JPG images instantly in your browser. No upload, no sign-up, no limits. 100% private and free.",
+  alternates: { canonical: "/svg-to-jpg" },
 };
 
 const jsonLd = {

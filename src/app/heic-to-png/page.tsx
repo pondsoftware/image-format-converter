@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "HEIC to PNG Converter — Lossless HEIC Conversion",
   description:
     "Convert HEIC iPhone photos to lossless PNG format. Preserves full quality and supports transparency. Free, private, no upload.",
+  alternates: { canonical: "/heic-to-png" },
 };
 
 const jsonLd = {

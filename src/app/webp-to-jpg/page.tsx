@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "WEBP to JPG Converter — Free Online Tool",
   description:
     "Convert WEBP images to JPG format instantly in your browser. No upload needed, completely private and free.",
+  alternates: { canonical: "/webp-to-jpg" },
 };
 
 const jsonLd = {

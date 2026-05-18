@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "AVIF to JPG Converter — Convert AVIF Images Online",
   description:
     "Convert AVIF images to JPG format instantly in your browser. Free, private, no upload required. Works with all AVIF files.",
+  alternates: { canonical: "/avif-to-jpg" },
 };
 
 const jsonLd = {

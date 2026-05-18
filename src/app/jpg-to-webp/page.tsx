@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "JPG to WebP Converter — Smaller Files, Same Quality Free",
   description:
     "Convert JPG images to WebP for 25-35% smaller file sizes. Free, private, browser-based converter. No upload required.",
+  alternates: { canonical: "/jpg-to-webp" },
 };
 
 const jsonLd = {

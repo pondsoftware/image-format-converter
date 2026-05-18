@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "GIF to PNG Converter — Convert GIF Images to PNG Free",
   description:
     "Convert GIF images to PNG format for better quality and transparency. Free, private, browser-based. No upload required.",
+  alternates: { canonical: "/gif-to-png" },
 };
 
 const jsonLd = {

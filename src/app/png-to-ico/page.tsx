@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "PNG to ICO Converter — Create Favicons Free",
   description:
     "Convert PNG images to ICO format for website favicons. Free, private, browser-based. No upload required. Creates 32x32 ICO files.",
+  alternates: { canonical: "/png-to-ico" },
 };
 
 const jsonLd = {
